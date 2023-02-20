@@ -8,7 +8,7 @@ import {Track} from '../Track/Track.js';
 export class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {searchResults: [{name: 'hello', artist: 'me', album: 'whatever', id: '123'}, {name: 'hi there', artist: 'you', album: 'what', id: '456'}]}
+    this.state = {results: [{name: 'hello', artist: 'me', album: 'whatever', id: '123'}, {name: 'hi there', artist: 'you', album: 'what', id: '456'}]}
   }
   render(){
     return (
@@ -18,7 +18,7 @@ export class App extends React.Component {
           <Track/>
           <SearchBar />
         <div className="App-playlist">
-          <SearchResults results = {this.state.searchResults}/>
+          <SearchResults results = {this.state.results}/>
           <Playlist />
         </div>
       </div>

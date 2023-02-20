@@ -7,8 +7,7 @@ export class SearchResults extends React.Component {
     return (
       <div className="SearchResults">
          <h2>Results</h2>
-         <Tracklist tracks = {this.props.results} reptiles={['alligator', 'snake', 'lizard']}/>
-         
+         <Tracklist results = {this.props.results}/>
       </div>
     )
   }
