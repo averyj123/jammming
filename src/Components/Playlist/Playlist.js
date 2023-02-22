@@ -1,6 +1,7 @@
 import React from 'react';
 import './Playlist.css';
 import {Tracklist} from '../Tracklist/Tracklist.js';
+import {getAccessToken, search} from '../../util/Spotify.js';
 
 export class Playlist extends React.Component {
   constructor(props) {
@@ -13,12 +14,12 @@ export class Playlist extends React.Component {
   }
 
   render(){
+    search('hello');
     return (
     <div className="Playlist">
-      <h1>{this.props.name}</h1>
       <input defaultValue={'New Playlist'} onChange = {this.handleNameChange}/>
       <Tracklist results ={this.props.tracks} isRemoval ={true} onRemove = {this.props.onRemove}/>
-      <button className="Playlist-save">SAVE TO SPOTIFY</button>
+      <button className="Playlist-save" onClick ={getAccessToken}>SAVE TO SPOTIFY</button>
    </div>
     )
   }
