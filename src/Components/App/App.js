@@ -3,7 +3,7 @@ import React from 'react';
 import {Playlist} from '../Playlist/Playlist.js';
 import {SearchBar} from '../SearchBar/SearchBar.js';
 import {SearchResults} from '../SearchResults/SearchResults.js';
-import { getAccessToken, search } from '../../util/Spotify';
+import Spotify from '../../util/Spotify';
 
 export class App extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export class App extends React.Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
-    //this.search = this.search.bind(this);
+    this.search = this.search.bind(this);
   }
 
   addTrack(track) {
@@ -38,23 +38,23 @@ export class App extends React.Component {
   }
 
   savePlaylist() {
-    const trackURIs = [];
-    for (const track in this.state.playlistTracks) {
-      let uri = 'spotify:track:'+this.state.playlistTracks[track].id;
-      trackURIs.push(uri);
-    }
+    const trackURIs = this.state.playlistTracks.map(track => track.uri);
   }
-  /*
+  
+  
   search(term) {
-    console.log(term);
-  }*/
+    Spotify.onSearch(term).then(searchResult => {
+      this.setState({searchResults: {name: 'toxic', artist: 'britney spears', album: 'in the zone', id: '6I9VzXrHxO9rA9A5euc8Ak'}})
+    })
+  }
+
 
   render(){
     return (
     <div>
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App">
-          <SearchBar onSearch = {search}/>
+          <SearchBar onSearch = {this.search}/>
         <div className="App-playlist">
           <SearchResults results = {this.state.searchResults} onAdd = {this.addTrack}/>
           <Playlist name= {this.state.playlistName} tracks= {this.state.playlistTracks}  onRemove ={this.removeTrack} onNameChange= {this.updatePlaylistName} onSave = {this.savePlaylist}/>
